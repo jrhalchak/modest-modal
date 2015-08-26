@@ -8,7 +8,7 @@ A less presumptuous modal plugin
   To see the default styles and other examples - <a href="http://jrhalchak.github.io/modest-modal/">visit the pages site</a>.
 </p>
 <p>
-  This was inspired by uglipop.js but created for jQuery to allow for more plugin options and allow for stacking (and keeping track of) multiple modals.
+  This was inspired by uglipop.js but created for jQuery to allow for more plugin options and allow for stacking (and keeping track of) multiple modals. It currently uses CSS3 transitions for the animation so they will only work on browsers that support transitions.
 </p>
 <h2>Usage</h2>
 <p>
@@ -33,7 +33,7 @@ A less presumptuous modal plugin
   content: '', // 'url' when ajax, 'css-selector' when html, 'string' when content
   modalClass: '', // 'class' to add to modal on top of default class
   closeButton: '', // a 'selector' to apply the close button binding to
-  transitionDuration: '', // '0.4s' or '400' override the transition length for fadeins
+  transitionDuration: '', // '0.4s' override the transition length for fadeins
   positionX: '', // '50%', '500px', etc. Override the initial position FROM LEFT (for animation before it reaches 50%)
   positionY: '', // '50%', '500px', etc. Override the initial position FROM TOP (for animation before it reaches 50%)
   overlayBackground: '', // css background property values to override overlay – i.e. 'url(bg.jpg) top left no-repeat'
@@ -50,7 +50,7 @@ A less presumptuous modal plugin
     data-modestmodal-content="" <!-- 'url' when ajax, 'css-selector' when html, 'string' when content -->
     data-modestmodal-modal-class="" <!-- 'class' to add to modal on top of default class -->
     data-modestmodal-close-selector="" <!-- a 'selector' to apply the close button binding to -->
-    data-modestmodal-transition-duration="" <!-- '0.4s' or '400' override the transition length for fadeins -->
+    data-modestmodal-transition-duration="" <!-- '0.4s' override the transition length for fadeins -->
     data-modestmodal-position-x="" <!-- '50%', '500px', etc. Override the initial position FROM LEFT (for animation before it reaches 50%) -->
     data-modestmodal-position-y="" <!-- '50%', '500px', etc. Override the initial position FROM TOP (for animation before it reaches 50%) -->
     data-modestmodal-overlay-background="" <!-- css background property values to override overlay – i.e. 'url(bg.jpg) top left no-repeat' -->
