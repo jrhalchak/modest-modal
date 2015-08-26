@@ -5,7 +5,7 @@ A less presumptuous modal plugin
   Modest modal is a jQuery plugin that makes as few styling presumptions as possible.  Technically I could've left out the overlay but good news, <em>you can override it</em>. Essentially it just centers a div on the page and fades an overlay into view.
 </p>
 <p>
-  To see the default styles <a href="#" data-modestmodal data-modestmodal-type="content" data-modestmodal-content="Tada!">open the base modal</a>.
+  To see the default styles and other examples - <a href="http://jrhalchak.github.io/modest-modal/">visit the pages site</a>.
 </p>
 <p>
   This was inspired by uglipop.js but created for jQuery to allow for more plugin options and allow for stacking (and keeping track of) multiple modals.
