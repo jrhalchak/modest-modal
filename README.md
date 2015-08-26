@@ -15,14 +15,14 @@ A less presumptuous modal plugin
   Include the <code>modestmodal.jquery.min.js</code> somewhere after your jquery include at the bottom of the body &ndash; or wherever your scripts are.
   <br />
   Then just call initialize the plugin <code>$.modestmodal()</code>.
-  ```
-  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script src="compiled/modestmodal.jquery.js"></script>
-  <script>
-    $.modestmodal()
-  </script>
-  ```
 </p>
+```
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="compiled/modestmodal.jquery.js"></script>
+<script>
+  $.modestmodal()
+</script>
+```
 <p>
   From there, you can manually call <code>$.modestmodal.open({options})</code> or add <code>data-modestmodal</code> to whatever element you want to trigger the modal (on click).
 </p>
