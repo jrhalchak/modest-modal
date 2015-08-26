@@ -18,7 +18,7 @@ body {
 h1,h2,h3,h4,h5,h6 { margin: 5px 0; color: #313332; line-height: 1; }
 a { color: #078FB1; text-decoration: none; }
 
-code { display: inline-block; padding: 3px; border: 1px solid #ddd; background: #fafafa; }
+code { display: inline-block; padding: 3px; border: 1px solid #dbdddc; background: #fdfffe; }
 pre code { display: block; padding: 10px; overflow-x: scroll; font-size: 12px; }
 
 .clearfix:after { content: ''; display: table; clear: both; }
