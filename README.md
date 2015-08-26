@@ -72,7 +72,7 @@ A less presumptuous modal plugin
     Currently only works in IE9+. <strong>TODO</strong>: Change translate -50% to negative margins in a child div.
   </li>
   <li>
-    Doesn't account for browser window height and doesn't allow scrolling (to top or botttom of modal container).  Will either need a max-height in the code or adding &ldquo;meta&rdquo; scrolling of the modal.
+    Doesn't account for browser window height and doesn't allow scrolling (to top or botttom of modal container).  Will either need a max-height in the code or adding &ldquo;meta&rdquo; scrolling of the modal.  The may be something that is just offset to the user's CSS styles to handle.
   </li>
 </ol>
 <strong>Having problems?</strong>
