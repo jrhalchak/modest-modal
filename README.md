@@ -68,6 +68,9 @@ A less presumptuous modal plugin
   <li>
     Currently only accepts <code>#s</code> or <code>#.#s</code> notation for transition duration. Would be mice to add conversion to/from ms.
   </li>
+  <li>
+    Currently only works in IE9+. <strong>TODO</strong>: Change translate -50% to negative margins in a child div.
+  </li>
 </ol>
 <strong>Having problems?</strong>
 <p>
