@@ -15,7 +15,13 @@ A less presumptuous modal plugin
   Include the <code>modestmodal.jquery.min.js</code> somewhere after your jquery include at the bottom of the body &ndash; or wherever your scripts are.
   <br />
   Then just call initialize the plugin <code>$.modestmodal()</code>.
-  <pre><code>&lt;script src=&quot;https://code.jquery.com/jquery-1.11.3.min.js&quot;&gt;&lt;/script&gt;<br />&lt;script src=&quot;compiled/modestmodal.jquery.js&quot;&gt;&lt;/script&gt;<br /><br />&lt;script&gt;<br />    $.modestmodal()<br />&lt;/script&gt;</code></pre>
+  ```
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="compiled/modestmodal.jquery.js"></script>
+  <script>
+    $.modestmodal()
+  </script>
+  ```
 </p>
 <p>
   From there, you can manually call <code>$.modestmodal.open({options})</code> or add <code>data-modestmodal</code> to whatever element you want to trigger the modal (on click).
@@ -38,20 +44,20 @@ A less presumptuous modal plugin
 ```
 <h4>Element-Based Options</h4>
 ```
-&lt;a href="#"
+<a href="#"
     data-modestmodal
-    data-modestmodal-type="" &lt;!-- 'ajax', 'html', or 'content' --&gt;
-    data-modestmodal-content="" &lt;!-- 'url' when ajax, 'css-selector' when html, 'string' when content --&gt;
-    data-modestmodal-modal-class="" &lt;!-- 'class' to add to modal on top of default class --&gt;
-    data-modestmodal-close-selector="" &lt;!-- a 'selector' to apply the close button binding to --&gt;
-    data-modestmodal-transition-duration="" &lt;!-- '0.4s' or '400' override the transition length for fadeins --&gt;
-    data-modestmodal-position-x="" &lt;!-- '50%', '500px', etc. Override the initial position FROM LEFT (for animation before it reaches 50%) --&gt;
-    data-modestmodal-position-y="" &lt;!-- '50%', '500px', etc. Override the initial position FROM TOP (for animation before it reaches 50%) --&gt;
-    data-modestmodal-overlay-background="" &lt;!-- css background property values to override overlay – i.e. 'url(bg.jpg) top left no-repeat' --&gt;
-    data-modestmodal-disable-escape &lt;!-- passed in as true/false or checks existence of data attribute (with no value) --&gt;
-    data-modestmodal-uncloseable&gt; &lt;!-- passed in as true/false or checks existence of data attribute (with no value) --&gt;
+    data-modestmodal-type="" <!-- 'ajax', 'html', or 'content' -->
+    data-modestmodal-content="" <!-- 'url' when ajax, 'css-selector' when html, 'string' when content -->
+    data-modestmodal-modal-class="" <!-- 'class' to add to modal on top of default class -->
+    data-modestmodal-close-selector="" <!-- a 'selector' to apply the close button binding to -->
+    data-modestmodal-transition-duration="" <!-- '0.4s' or '400' override the transition length for fadeins -->
+    data-modestmodal-position-x="" <!-- '50%', '500px', etc. Override the initial position FROM LEFT (for animation before it reaches 50%) -->
+    data-modestmodal-position-y="" <!-- '50%', '500px', etc. Override the initial position FROM TOP (for animation before it reaches 50%) -->
+    data-modestmodal-overlay-background="" <!-- css background property values to override overlay – i.e. 'url(bg.jpg) top left no-repeat' -->
+    data-modestmodal-disable-escape <!-- use data attribute as a boolean (no value) -->
+    data-modestmodal-uncloseable> <!-- use data attribute as a boolean (no value) -->
 
-    Link to Modal&lt/a&gt;
+    Link to Modal</a>
 ```
 <h3>Known Issues / Nice-to-haves</h3>
 <ol>
