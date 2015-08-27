@@ -1,4 +1,4 @@
-// Modest Modal 1.0.0
+// Modest Modal 1.0.3
 // Jonathan Halchak, www.jrhalchak.com, @onlinebhero
 // License: MIT - do whatever you want
 
@@ -82,6 +82,7 @@
               $.modestmodal.close();
           });
           $newModal.css({'opacity':1,'top':'50%'});
+          $newModal.trigger('mm.open');
         }, 300);
       }
 
@@ -91,7 +92,7 @@
         });
       }
 
-      $.modestmodal.init = function() {
+      function modestmodalInit() {
         defaults = $.extend({}, defaults, changeableProperties(options));
 
         bindClose(defaults.closeButton);
@@ -121,9 +122,9 @@
 
       $.modestmodal.open = function(customOptions){
         var $newOverlay = defaults.$overlay.clone(),
-          $newModal = defaults.$modal.clone(),
           modalCount = _currentModals.length + 1,
           opts = $.extend({}, defaults, changeableProperties(customOptions)),
+          $newModal = opts.type == 'html' ? $(opts.content).data('doNotRemove', true) : defaults.$modal.clone(),
           completeOverlayStyles = opts.overlayStyles;
 
         if (!opts.type) return false;
@@ -157,9 +158,10 @@
             'top': opts.positionY,
             'left': opts.positionX
           });
+        $newModal.trigger('mm.beforeOpen');
 
         if(opts.type == 'content' || opts.type == 'html') {
-          $newModal.html(opts.type == 'html' ? $(opts.content).html() : opts.content);
+          if(opts.type == 'content') $newModal.html(opts.content);
           pushAndAppendModals($newModal, $newOverlay);
         } else if (opts.type == 'ajax') {
           $.get(opts.content)
@@ -172,22 +174,29 @@
         }
       }
 
-      $.modestmodal.close = function() {
-        var $$lastOpen = _currentModals.pop();
+      $.modestmodal.getOpenModals = function() {
+        return _currentModals;
+      }
+
+      $.modestmodal.close = function(modalIndex) {
+        var $$lastOpen = modalIndex && modalIndex < _currentModals.length ? _currentModals.splice(modalIndex, 1)[0] : _currentModals.pop();
+        $($$lastOpen.modal).trigger('mm.beforeClose', [$$lastOpen.modal, $$lastOpen.overlay]);
         $$lastOpen.modal.css('opacity',0);
         $$lastOpen.overlay.css('opacity',0);
           setTimeout(function() {
-            $$lastOpen.modal.remove()
+            $($$lastOpen.modal).trigger('mm.close');
+            if(!$$lastOpen.modal.data('doNotRemove')) $$lastOpen.modal.remove()
             $$lastOpen.overlay.remove();
           }, 400);
       }
+
       $.modestmodal.destroy = function(){
           $('[id^=modestmodal-],[class^=modestmodal-]').remove();
           $.modestmodal.prototype.destroy.apply(this, arguments );
       }
 
       if(!modestmodalInitialized) {
-        $.modestmodal.init();
+        modestmodalInit();
         modestmodalInitialized = true;
       } else if (options) {
         defaults = $.extend({}, defaults, changeableProperties(options));

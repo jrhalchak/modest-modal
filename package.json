@@ -1,7 +1,7 @@
 {
   "name": "modestmodal",
-  "version": "1.0.0",
-  "author": "JRH <jrh@jrhalchak.com> (http://www.jrhalchak.com)",
+  "version": "1.0.3",
+  "author": "JRH (http://www.jrhalchak.com)",
   "private": "true",
   "dependencies": {
     "gulp": "^3.9.0",

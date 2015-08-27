@@ -11,7 +11,7 @@
           Modest<br />Modal
         </div>
         <div class="Sidebar-externalLinks">
-          <a href="https://github.com/jrhalchak/modest-modal">Github</a> |
+          <a href="https://github.com/jrhalchak/modest-modal"><strong>Download on Github</strong></a> |
           <a href="http://www.jrhalchak.com">jrhalchak</a>
         </div>
         <div class="Sidebar-licensing">
@@ -67,7 +67,19 @@
                 data-modestmodal-modal-class="Modal"
                 data-modestmodal-type="ajax"
                 data-modestmodal-content="test.html">
-                open ajax
+                Open ajax
+                </a>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <a href="#"
+                data-modestmodal
+                data-modestmodal-modal-class="Modal"
+                data-modestmodal-type="html"
+                data-modestmodal-content=".modest-modal-events-example"
+                data-modestmodal-close-selector=".js-modestModalClose">
+                Fire custom events
                 </a>
             </li>
           </ul>
@@ -100,6 +112,50 @@
         </p>
         <h4>Element-Based Options</h4>
           <pre><code>&lt;a href=&quot;#&quot<br />    data-modestmodal</br >    data-modestmodal-type=&quot;&quot; &lt;!-- 'ajax', 'html', or 'content' --&gt;<br />    data-modestmodal-content=&quot;&quot; &lt;!-- 'url' when ajax, 'css-selector' when html, 'string' when content --&gt;<br />    data-modestmodal-modal-class=&quot;&quot; &lt;!-- 'class' to add to modal on top of default class --&gt;<br />    data-modestmodal-close-selector=&quot;&quot; &lt;!-- a 'selector' to apply the close button binding to --&gt;<br />    data-modestmodal-transition-duration=&quot;&quot; &lt;!-- '0.4s' override the transition length for fadeins --&gt;<br />    data-modestmodal-position-x=&quot;&quot; &lt;!-- '50%', '500px', etc. Override the initial position FROM LEFT (for animation before it reaches 50%) --&gt;<br />    data-modestmodal-position-y=&quot;&quot; &lt;!-- '50%', '500px', etc. Override the initial position FROM TOP (for animation before it reaches 50%) --&gt;<br />    data-modestmodal-overlay-background=&quot;&quot; &lt;!-- css background property values to override overlay &ndash; i.e. 'url(bg.jpg) top left no-repeat' --&gt;<br />    data-modestmodal-disable-escape &lt;!-- use data attribute as a boolean (no value) --&gt;<br />    data-modestmodal-uncloseable&gt; &lt;!-- use data attribute as a boolean (no value) --&gt;<br /><br />    Link to Modal&lt;/a&gt;</code></pre>
+       <h4>Methods</h4>
+        <dl>
+          <dt><code>$.modestmodal.open({options})</code></dt>
+          <dd>Will open a new modal based on the options object passed in</dd>
+          <dt><code>$.modestmodal.getOpenModals()</code></dt>
+          <dd>
+            Returns an array of objects with the modals and overlays currently open in the order they were opened.
+            <br /><br />
+            The objects returned are <pre><code>{<br />    modal: $(), //jQuery object referencing the modal element<br />    overlay: $() //jQuery object referencing the overlay element<br />}</code></pre>
+          </dd>
+          <dt><code>$.modestmodal.close(optional index)</code></dt>
+          <dd>
+            Will close the last open modal by default. Accepts an optional index to close/remove (it uses the same array as <code>getOpenModals</code>). If the index is invalid, it reverts to closing the last open.
+          </dd>
+          <dt><code>$.modestmodal.destroy()</code></dt>
+          <dd>
+            Removes the modest modal plugin and removes any residual elements.<br />
+            <strong>Note</strong>: this removes any elements who's <code>id</code> or <code>class</code> starts with &ldquo;modestmodal-&rdquo;
+          </dd>
+        </dl>
+        <h4>Custom Events</h4>
+        <dl>
+          <dt><code>mm.beforeOpen</code></dt>
+          <dd>Fires before the modal or overlay are added to the DOM and shown.</dd>
+          <dt><code>mm.open</code></dt>
+          <dd>Fires after element has been added and given full opacity (may happen before CSS transitions)</dd>
+          <dt><code>mm.beforeClose</code></dt>
+          <dd>Fires as soon as the <code>close</code> method is called</dd>
+          <dt><code>mm.close</code></dt>
+          <dd>Fires after modal and overlay are close and have been removed (if applicable)</dd>
+        </dl>
+        <h3>Versions</h3>
+        <dl>
+          <dt>1.0.3</d1>
+          <dd>
+            <ul class="u-noListPadding">
+              <li>Adds custom events to modal. Can be used with type=HTML or with subscribed to through event bubbling.</li>
+              <li>Duplicates modal when HTML is used so it knows not to remove it on close.</li>
+              <li>Adds index option to close method.</li>
+            </ul>
+          </dd>
+          <dt>1.0.0</d1>
+          <dd>Initial commit</dd>
+        </dl>
         <h3>Known Issues / Nice-to-haves</h3>
         <ol>
           <li>
@@ -115,7 +171,6 @@
           <li>
             Doesn't account for browser window height and doesn't allow scrolling (to top or botttom of modal container).  Will either need a max-height in the code or adding &ldquo;meta&rdquo; scrolling of the modal. The may be something that is just offset to the user's CSS styles to handle.
           </li>
-          <li>Use either custom events or add options to pass callbacks for things like <code>beforeClose</code>, <code>afterClose</code>, <code>beforeOpen</code>,<code>afterOpen</code>, etc.</li>
         </ol>
         <strong>Having problems?</strong>
         <p>
@@ -133,11 +188,26 @@
         Open a stacking modal with content
       </a>
     </div>
+    <div class="modest-modal-events-example">
+      <a href="#" class="js-modestModalClose modal-close">&times;</a>
+      <h4>Events Example</h4>
+      <p>Close to fire close events.</p>
+    </div>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="compiled/modestmodal.jquery.min.js"></script>
     <script>
       $(function() {
         $.modestmodal();
+
+        $(document).on('mm.beforeClose', '.modest-modal-events-example', function(e, modal, overlay) {
+          alert('before close');
+        }).on('mm.close', '.modest-modal-events-example', function(e, modal, overlay) {
+          alert('closed');
+        }).on('mm.beforeOpen', '.modest-modal-events-example', function(e, modal, overlay) {
+          alert('before open');
+        }).on('mm.open', '.modest-modal-events-example', function(e, modal, overlay) {
+          alert('opened');
+        });
       });
     </script>
   </body>

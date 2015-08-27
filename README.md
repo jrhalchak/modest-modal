@@ -59,6 +59,56 @@ A less presumptuous modal plugin
 
     Link to Modal</a>
 ```
+<h4>Methods</h4>
+ <dl>
+   <dt><code>$.modestmodal.open({options})</code></dt>
+   <dd>Will open a new modal based on the options object passed in</dd>
+   <dt><code>$.modestmodal.getOpenModals()</code></dt>
+   <dd>
+     Returns an array of objects with the modals and overlays currently open in the order they were opened.
+     <br /><br />
+     The objects returned are
+ ```
+ {
+   modal: $(), //jQuery object referencing the modal element
+   overlay: $() //jQuery object referencing the overlay element
+ }
+ ```
+   </dd>
+   <dt><code>$.modestmodal.close(optional index)</code></dt>
+   <dd>
+     Will close the last open modal by default. Accepts an optional index to close/remove (it uses the same array as <code>getOpenModals</code>). If the index is invalid, it reverts to closing the last open.
+   </dd>
+   <dt><code>$.modestmodal.destroy()</code></dt>
+   <dd>
+     Removes the modest modal plugin and removes any residual elements.<br />
+     <strong>Note</strong>: this removes any elements who's <code>id</code> or <code>class</code> starts with &ldquo;modestmodal-&rdquo;
+   </dd>
+ </dl>
+ <h4>Custom Events</h4>
+ <dl>
+   <dt><code>mm.beforeOpen</code></dt>
+   <dd>Fires before the modal or overlay are added to the DOM and shown.</dd>
+   <dt><code>mm.open</code></dt>
+   <dd>Fires after element has been added and given full opacity (may happen before CSS transitions)</dd>
+   <dt><code>mm.beforeClose</code></dt>
+   <dd>Fires as soon as the <code>close</code> method is called</dd>
+   <dt><code>mm.close</code></dt>
+   <dd>Fires after modal and overlay are close and have been removed (if applicable)</dd>
+ </dl>
+ <h3>Versions</h3>
+ <dl>
+   <dt>1.0.3</d1>
+   <dd>
+     <ul class="u-noListPadding">
+       <li>Adds custom events to modal. Can be used with type=HTML or with subscribed to through event bubbling.</li>
+       <li>Duplicates modal when HTML is used so it knows not to remove it on close.</li>
+       <li>Adds index option to close method.</li>
+     </ul>
+   </dd>
+   <dt>1.0.0</d1>
+   <dd>Initial commit</dd>
+ </dl>
 <h3>Known Issues / Nice-to-haves</h3>
 <ol>
   <li>
@@ -74,7 +124,6 @@ A less presumptuous modal plugin
   <li>
     Doesn't account for browser window height and doesn't allow scrolling (to top or botttom of modal container).  Will either need a max-height in the code or adding &ldquo;meta&rdquo; scrolling of the modal.  The may be something that is just offset to the user's CSS styles to handle.
   </li>
-  <li>Use either custom events or add options to pass callbacks for things like <code>beforeClose</code>, <code>afterClose</code>, <code>beforeOpen</code>,<code>afterOpen</code>, etc.</li>
 </ol>
 <strong>Having problems?</strong>
 <p>

@@ -18,8 +18,14 @@ body {
 h1,h2,h3,h4,h5,h6 { margin: 5px 0; color: #313332; line-height: 1; }
 a { color: #078FB1; text-decoration: none; }
 
-code { display: inline-block; padding: 3px; border: 1px solid #dbdddc; background: #fdfffe; }
+code { display: inline-block; padding: 3px; background: #E3EBEC; }
 pre code { display: block; padding: 10px; overflow-x: scroll; font-size: 12px; }
+dt code { margin: 15px 0 5px 0; }
+dt:first-of-type code { margin-top: 0; }
+
+.u-noListPadding {
+  padding-left: 0;
+}
 
 .clearfix:after { content: ''; display: table; clear: both; }
 
@@ -46,7 +52,7 @@ pre code { display: block; padding: 10px; overflow-x: scroll; font-size: 12px; }
 }
 .Sidebar-externalLinks {
   text-align: center;
-  margin: 20px 0;
+  margin: 40px 0 20px 0;
   font-size: 12px;
 }
 .Sidebar-examples {
@@ -54,7 +60,7 @@ pre code { display: block; padding: 10px; overflow-x: scroll; font-size: 12px; }
 }
 .Sidebar-examplesHeader {
   text-align: center;
-  background: #535554;
+  background: #7C9194;
   color: #fff;
   padding: 10px 0;
 }
@@ -80,4 +86,5 @@ pre code { display: block; padding: 10px; overflow-x: scroll; font-size: 12px; }
   right: -5px;
 }
 
-.modest-modal-html { display: none; }
+.modest-modal-html,
+.modest-modal-events-example { display: none; }
