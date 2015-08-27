@@ -109,7 +109,7 @@ A less presumptuous modal plugin
    <dt>1.0.0</d1>
    <dd>Initial commit</dd>
  </dl>
-<h3>Known Issues / Nice-to-haves</h3>
+<h3>Known Issues / Idea Board</h3>
 <ol>
   <li>
     Options passed on initialization are persistent when opening via method call (<code>$.modestmodal.open()</code>) but
@@ -120,6 +120,9 @@ A less presumptuous modal plugin
   </li>
   <li>
     Currently only works in IE9+. <strong>TODO</strong>: Change translate -50% to negative margins in a child div.
+  </li>
+  <li>
+    Add absolute vs fixed positioning (potentially disable body scroll?)
   </li>
   <li>
     Doesn't account for browser window height and doesn't allow scrolling (to top or botttom of modal container).  Will either need a max-height in the code or adding &ldquo;meta&rdquo; scrolling of the modal.  The may be something that is just offset to the user's CSS styles to handle.
