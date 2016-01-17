@@ -1,55 +1,55 @@
-// Modest Modal 1.0.3
+// Modest Modal 1.0.4
 // Jonathan Halchak, www.jrhalchak.com, @onlinebhero
 // License: MIT - do whatever you want
 
 ;(function ( $, window, document, undefined ) {
-  var _currentModals = [], modestmodalInitialized = false;
 
   $.modestmodal = $.modestmodal || function(options) {
+      var _currentModals = [], modestmodalInitialized = false, self = this,
+
       // ** means will allow override
-      var self = this,
-        defaults = {
-          $modal: $('<div class="modestmodal-modal" />'),
-          $overlay: $('<div class="modestmodal-overlay" />'),
-          closeButton: '.modestmodal-close', // **
-          openSelector: '[data-modestmodal]', // **
-          type: null, // **
-          content: '', // **
-          modalClass: '', // **
-          zIndex: 99900,
-          transitionDuration: '0.4s', // **
-          transitionProperty: {
-              '-webkit-transition': 'all 0.4s ease',
-              '-moz-transition': 'all 0.4s ease',
-              'transition': 'all 0.4s ease;'
-          },
-          positionX: '50%', // from left // **
-          positionY:'60%', // from top // **
-          modalStyles: {
-            'display':'none',
-            'position':'fixed',
-            '-webkit-transform': 'translate(-50%, -50%)',
-            '-ms-transform': 'translate(-50%, -50%)',
-            'transform': 'translate(-50%, -50%)',
-            'opacity':0
-          },
-          overlayStyles: {
-            'visibility':'hidden',
-            'position':'fixed',
-            'top':0,
-            'bottom':0,
-            'left':0,
-            'right':0,
-            'opacity':0,
-            'width':'100%',
-            'height':'100%',
-            'background-color':'black',
-          },
-          overlayBackground: 'rgba(0,0,0,0.3)', //**
-          uncloseable: false, //**
-          disableEscape: false, //**
-          ajaxCallback: null //**
-        };
+      defaults = {
+        $modal: $('<div class="modestmodal-modal" />'),
+        $overlay: $('<div class="modestmodal-overlay" />'),
+        closeButton: '.modestmodal-close', // **
+        openSelector: '[data-modestmodal]', // **
+        type: null, // **
+        content: '', // **
+        modalClass: '', // **
+        zIndex: 99900,
+        transitionDuration: '0.4s', // **
+        transitionProperty: {
+            '-webkit-transition': 'all 0.4s ease',
+            '-moz-transition': 'all 0.4s ease',
+            'transition': 'all 0.4s ease;'
+        },
+        left: '50%', // from left // **
+        top:'60%', // from top // **
+        modalStyles: {
+          'display':'none',
+          '-webkit-transform': 'translate(-50%, -50%)',
+          '-ms-transform': 'translate(-50%, -50%)',
+          'transform': 'translate(-50%, -50%)',
+          'opacity':0
+        },
+        overlayStyles: {
+          'visibility':'hidden',
+          'position':'fixed',
+          'top':0,
+          'bottom':0,
+          'left':0,
+          'right':0,
+          'opacity':0,
+          'width':'100%',
+          'height':'100%',
+          'background-color':'black',
+        },
+        overlayBackground: 'rgba(0,0,0,0.3)', //**
+        position: 'fixed', //**
+        uncloseable: false, //**
+        disableEscape: false, //**
+        ajaxCallback: null //**
+      };
 
       function changeableProperties(optionObject) {
         if(!optionObject) return {};
@@ -60,9 +60,10 @@
           openSelector: optionObject.openSelector || defaults.openSelector,
           modalClass: optionObject.modalClass || defaults.modalClass,
           transitionDuration: optionObject.transitionDuration || defaults.transitionDuration,
-          positionX: optionObject.positionX || defaults.positionX,
-          positionY: optionObject.positionY || defaults.positionY,
+          left: optionObject.left || defaults.left,
+          top: optionObject.top || defaults.top,
           overlayBackground: optionObject.overlayBackground || defaults.overlayBackground,
+          position: optionObject.position || defaults.position,
           disableEscape: typeof optionObject.disableEscape !== 'undefined' ? optionObject.disableEscape : defaults.disableEscape,
           uncloseable: typeof optionObject.uncloseable !== 'undefined' ? optionObject.uncloseable : defaults.uncloseable
         }
@@ -87,15 +88,13 @@
       }
 
       function bindClose(closeButton) {
-        $('body').on('click', closeButton, function() {
+        $('body').off('click', closeButton).on('click', closeButton, function() {
             $.modestmodal.close();
         });
       }
 
       function modestmodalInit() {
         defaults = $.extend({}, defaults, changeableProperties(options));
-
-        bindClose(defaults.closeButton);
 
         $('body').on('click', defaults.openSelector, function() {
           var $this = $(this),
@@ -105,9 +104,10 @@
               modalClass: $this.data('modestmodal-modal-class') || defaults.modalClass,
               closeButton: $this.data('modestmodal-close-selector') || defaults.closeButton,
               transitionDuration: $this.data('modestmodal-transition-duration') || defaults.transitionDuration,
-              positionX: $this.data('modestmodal-position-x') || defaults.positionX,
-              positionY: $this.data('modestmodal-position-y') || defaults.positionY,
+              left: $this.data('modestmodal-left') || defaults.left,
+              top: $this.data('modestmodal-top') || defaults.top,
               overlayBackground: $this.data('modestmodal-overlay-background') || defaults.overlayBackground,
+              position: $this.data('modestmodal-position') || defaults.position,
               disableEscape: typeof $this.attr('data-modestmodal-disable-escape') !== 'undefined' ? true : false,
               uncloseable: typeof $this.attr('data-modestmodal-uncloseable') !== 'undefined' ? true : false
             };
@@ -153,10 +153,11 @@
           .attr('id', 'modestmodal-modal-' + modalCount)
           .css(opts.modalStyles)
           .css(opts.transitionProperty)
+          .css('position', opts.position)
           .css({
             'z-index': (modalCount + opts.zIndex + 1),
-            'top': opts.positionY,
-            'left': opts.positionX
+            'top': opts.top,
+            'left': opts.left
           });
         $newModal.trigger('mm.beforeOpen');
 
@@ -170,8 +171,10 @@
               pushAndAppendModals($newModal, $newOverlay);
               if(typeof opts.ajaxCallback === 'function') opts.ajaxCallback();
             })
-            .error(function() { console.log('modestmodal: Error with AJAX call.'); return; });
+            .fail(function() { console.log('modestmodal: Error with AJAX call.'); return; });
         }
+
+        if (opts.closeButton !== defaults.closeButton) bindClose(customOptions.closeButton);
       }
 
       $.modestmodal.getOpenModals = function() {
@@ -179,11 +182,20 @@
       }
 
       $.modestmodal.close = function(modalIndex) {
-        var $$lastOpen = modalIndex && modalIndex < _currentModals.length ? _currentModals.splice(modalIndex, 1)[0] : _currentModals.pop();
+        var $$lastOpen;
+
+        if(!_currentModals.length) {
+          return false;
+        } else {
+          $$lastOpen = modalIndex && modalIndex < _currentModals.length ? _currentModals.splice(modalIndex, 1)[0] : _currentModals.pop();
+        }
+
         $($$lastOpen.modal).trigger('mm.beforeClose', [$$lastOpen.modal, $$lastOpen.overlay]);
         $$lastOpen.modal.css('opacity',0);
         $$lastOpen.overlay.css('opacity',0);
           setTimeout(function() {
+            $$lastOpen.modal.hide();
+            $$lastOpen.overlay.hide();
             $($$lastOpen.modal).trigger('mm.close');
             if(!$$lastOpen.modal.data('doNotRemove')) $$lastOpen.modal.remove()
             $$lastOpen.overlay.remove();

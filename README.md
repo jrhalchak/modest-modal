@@ -98,6 +98,15 @@ A less presumptuous modal plugin
  </dl>
  <h3>Versions</h3>
  <dl>
+   <dt>1.0.4</dt>
+   <dd>
+     <ul class="u-noListPadding">
+       <li>Add position property to modals</li>
+       <li>Renames positionX and positionY to left and top respectively</li>
+       <li>Quick-fix for multiple binding bug</li>
+       <li>Fix for transparent modal staying displayed</li>
+     </ul>
+   </dd>
    <dt>1.0.3</d1>
    <dd>
      <ul class="u-noListPadding">
